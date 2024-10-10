@@ -1,0 +1,95 @@
+.mySlides {
+  display: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  margin-top: 1em;
+  z-index: 1;
+}
+.container2 {
+  z-index: 1;
+
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 1440px;
+  height: 600px;
+}
+.slider {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 3%;
+  width: 100%;
+}
+.clickhere {
+  background-color: teal;
+  padding: 10px;
+  color: white;
+  border: 1px solid teal;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 60px;
+  right: 110px;
+  cursor: pointer;
+}
+
+.w3content {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+}
+.w3section {
+  flex: 8;
+  height: 100%;
+  width: 100%;
+  margin-top: 0.8%;
+  position: relative;
+}
+.hoverText {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.274);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hoverText div {
+  margin: 0 0 0 2em;
+  font-size: 3em;
+  max-width: 40%;
+  color: aliceblue;
+  text-transform: uppercase;
+  border-left: 10px solid goldenrod;
+  padding-left: 0.5em;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    background-color: white;
+  }
+  .container2 {
+    height: max-content;
+  }
+  .hoverText {
+    font-size: 0.4em;
+  }
+  .w3content {
+    display: none;
+  }
+  .w3section {
+    height: 160px;
+    width: 100%;
+  }
+}
