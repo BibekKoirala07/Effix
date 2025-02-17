@@ -359,7 +359,9 @@ const Signup = ({ onClose }) => {
                         <option selected>Choose a Role</option>
                         <option value="user">User</option>
                         <option value="technician">Techician</option>
-                        <option value="admin">Admin</option>
+                        <option value="admin" disabled>
+                          Admin
+                        </option>
                       </select>
                     </div>
                     <div>
