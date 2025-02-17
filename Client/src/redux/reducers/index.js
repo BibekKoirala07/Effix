@@ -1,9 +1,11 @@
-import addItem from "./additem";
+// import addItem from "./additem";
+import addItems from "./additem";
 import userSlice from "./User";
 import { combineReducers } from "redux";
 
 const rootReducers = combineReducers({
-  addItem,
+  // addItem,
+  addItems,
   user: userSlice,
 });
 
