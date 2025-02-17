@@ -24,6 +24,8 @@ const allowedDomains = ["http://localhost:3000", process.env.PROD_CLIENT_URL];
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
+  console.log("origin", req.headers.origin);
+
   if (allowedDomains.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
@@ -40,6 +42,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 app.use("/uploads", express.static("uploads"));
 
 app.use("/user", userRouter);
