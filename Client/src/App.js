@@ -37,11 +37,6 @@ import About from "./components/About";
 import Technician from "./components/Technician";
 
 const App = () => {
-  return (
-    <div className="h-screen text-2xl italic text-red flex text-center justify-center align-middle">
-      It will be completed in february 18
-    </div>
-  );
   const loginPopup = useSelector((state) => state.user.loginpopup);
   const password = useSelector((state) => state.user.password);
   const emailPopup = useSelector((state) => state.user.emailPopup);
