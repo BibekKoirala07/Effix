@@ -47,6 +47,7 @@ const OrdersStatus = () => {
       );
     }
   };
+
   const handleTrigger = (id, e) => {
     if (e == "completed") {
       setCompleteModal(true);
@@ -83,6 +84,7 @@ const OrdersStatus = () => {
         handleOrder("complete", id.id);
     }
   };
+
   const handleOrder = async (type, payload) => {
     const [response, error] = await updateStatus(type, payload);
     if (response) {
@@ -93,6 +95,7 @@ const OrdersStatus = () => {
       toast.error(error.response.data.msg);
     }
   };
+
   const handleCompleted = async (payload) => {
     const [response, error] = await updateStatusToCompleted(id.id, payload);
     if (response) {

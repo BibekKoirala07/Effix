@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { tooglePassword } from "../../redux/reducers/User";
+
 const ResetPassword = (props) => {
   const [data, setData] = useState({
     newPassword: "",

@@ -8,6 +8,7 @@ export const loginService = async (body) => {
     return [null, error];
   }
 };
+
 export const createUser = async (body) => {
   try {
     const response = await axiosInstance.post("user/register", body);

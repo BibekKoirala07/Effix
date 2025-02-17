@@ -117,11 +117,14 @@ exports.registerController = async (req, res) => {
     await Promise.all([sendEmail(emailData), newUser.save()]);
 
     console.log("ho ra ? yeha aai sakyo");
-    return res
-      .status(201)
-      .send(
-        "Account has been created. Please check your email to activate account"
-      );
+    return (
+      res
+        .status(201)
+        // .send(
+        //   "Account has been created. Please check your email to activate account"
+        // );
+        .send("Account created. Now do login")
+    );
   } catch (error) {
     console.log(error);
     console.log("error in register", error);

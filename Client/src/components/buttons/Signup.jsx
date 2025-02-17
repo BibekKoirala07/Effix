@@ -24,6 +24,7 @@ const Signup = ({ onClose }) => {
   const backdrop = () => {
     onClose(false);
   };
+
   const NUMBER = new RegExp("^[0-9]*$");
   const [list, setList] = useState([]);
 
@@ -37,6 +38,7 @@ const Signup = ({ onClose }) => {
       setData({ ...data, [type]: e.target.value });
     }
   };
+
   const handleAddress = (e, type) => {
     const temp = data;
     data.address[type] = e.target.value;
@@ -50,6 +52,7 @@ const Signup = ({ onClose }) => {
       setList(response.data);
     }
   };
+
   console.log("runn bhai rakheko xa");
 
   const handleSubmit = async () => {

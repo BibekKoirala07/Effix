@@ -7,6 +7,7 @@ import styles from "./Table.module.css";
 
 const Table = ({ list, handleSearch, titleArray, fields, admin, trigger }) => {
   const history = useHistory();
+
   const handleDelete = async (id) => {
     const [response] = await deleteService(id);
     if (response) {
@@ -17,7 +18,10 @@ const Table = ({ list, handleSearch, titleArray, fields, admin, trigger }) => {
     }
   };
   return (
-    <div style={{ zIndex: "1" }} className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div
+      style={{ zIndex: "1" }}
+      className="relative overflow-x-auto shadow-md sm:rounded-lg"
+    >
       <div className="p-4">
         <label for="table-search" className="sr-only">
           Search
@@ -66,10 +70,11 @@ const Table = ({ list, handleSearch, titleArray, fields, admin, trigger }) => {
             <tr className="bg-white border-b  hover:bg-gray-50 ">
               {fields?.map((field, index) => (
                 <td
-                  className={`${index === 0
-                    ? "font-medium text-gray-900  whitespace-nowrap"
-                    : ""
-                    } px-6 py-4`}
+                  className={`${
+                    index === 0
+                      ? "font-medium text-gray-900  whitespace-nowrap"
+                      : ""
+                  } px-6 py-4`}
                 >
                   {dat[field]}
                 </td>

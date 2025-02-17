@@ -27,11 +27,8 @@ const navigationDemo = {
         {
           id: "",
           name: "",
-          items: [
-
-          ],
+          items: [],
         },
-
       ],
     },
   ],
@@ -96,6 +93,7 @@ export default function Header({
   const handleLoginClose = (value) => {
     dispatch(toogleLogin(value));
   };
+
   useEffect(() => {
     getServices();
   }, []);
@@ -432,8 +430,8 @@ export default function Header({
                                                     !User?.isLoggedIn
                                                       ? handleLoginClose(true)
                                                       : router.push(
-                                                        `/service/${item.href}`
-                                                      )
+                                                          `/service/${item.href}`
+                                                        )
                                                   }
                                                   className="hover:text-gray-800"
                                                 >

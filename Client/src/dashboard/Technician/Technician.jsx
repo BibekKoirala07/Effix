@@ -9,9 +9,11 @@ const DashHome = () => {
   const [list, setList] = useState([]);
   const user = useSelector((state) => state.user);
   const [text, setText] = useState("");
+
   const handleSearch = (e) => {
     setText(e.target.value);
   };
+
   const titleArray = ["Name", "Phone", "Email", "Balance", "Experience"];
   const fields = ["name", "phone", "email", "balance", "experience"];
 
@@ -29,6 +31,7 @@ const DashHome = () => {
       );
     }
   };
+
   useEffect(() => {
     serviceList();
   }, [user]);

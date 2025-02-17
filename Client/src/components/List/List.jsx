@@ -38,6 +38,7 @@ export default function Items() {
   useEffect(() => {
     serviceList();
   }, []);
+
   return (
     <div className="bg-white">
       <div className="max-w-2xl flex flex-col items-center mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -55,7 +56,9 @@ export default function Items() {
                       ? `${URL_BACKEND}${product.image}`
                       : "/photos/services/placeholder.jpg"
                   }
-                  onError={(e)=>e.target.src="/photos/services/placeholder.jpg"}
+                  onError={(e) =>
+                    (e.target.src = "/photos/services/placeholder.jpg")
+                  }
                   alt={product.imageAlt}
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />

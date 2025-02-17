@@ -47,18 +47,23 @@ const App = () => {
   const [cart, setCart] = useState(false);
   const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
+
   const handleLoginClose = (value) => {
     dispatch(toogleLogin(value));
   };
+
   const handlePasswordClose = (value) => {
     dispatch(tooglePassword(value));
   };
+
   const handleEmailClose = (value) => {
     dispatch(toogleEmail(value));
   };
+
   const handleRegisterClose = (value) => {
     dispatch(toogleRegister(value));
   };
+
   const location = useLocation();
 
   const getOrders = async () => {

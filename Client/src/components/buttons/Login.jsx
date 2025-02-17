@@ -53,6 +53,7 @@ const Login = (props) => {
 
     dispatch(toogleSpinner(false));
   };
+
   const handleForgot = async () => {
     dispatch(toogleSpinner(true));
     if (!data.email) {
@@ -87,6 +88,7 @@ const Login = (props) => {
       setData({ ...data, [type]: e.target.value });
     }
   };
+
   return (
     <div className="min-h-screen fixed top-[0%] left-[0%] w-[100vw]  z-[122200] flex flex-col justify-center items-center sm:py-12">
       <div

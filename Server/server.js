@@ -6,6 +6,8 @@ const app = express();
 const { connectDB } = require("./helpers/db");
 const path = require("path");
 
+console.log("node_env", process.env.NODE_ENV);
+
 require("dotenv").config({
   path: "./config/config.env",
 });
@@ -20,8 +22,6 @@ const serviceCategoryRouter = require("./src/routes/serviceCategory.route");
 const serviceOrderRouter = require("./src/routes/serviceOrder.route");
 
 const allowedDomains = ["http://localhost:3000", process.env.PROD_CLIENT_URL];
-
-console.log(allowedDomains, allowedDomains);
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;

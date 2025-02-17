@@ -3,20 +3,13 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import {
   BookmarkAltIcon,
-  CalendarIcon,
   ChartBarIcon,
-  CursorClickIcon,
-  MenuIcon,
   PhoneIcon,
   PlayIcon,
-  RefreshIcon,
-  ShieldCheckIcon,
   SupportIcon,
-  ViewGridIcon,
-  XIcon,
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const solutions = [

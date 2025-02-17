@@ -51,6 +51,7 @@ const Home = (props) => {
       }
     }
   };
+
   useEffect(() => {
     if (props?.match?.path.split("/")[2] === "activation") {
       activateAccount();
@@ -59,6 +60,7 @@ const Home = (props) => {
     }
     console.log(props.match.path.split("/"));
   }, []);
+
   return (
     <div className="home" className="flex flex-col ">
       <MainBanner />
