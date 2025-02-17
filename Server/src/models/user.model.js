@@ -66,8 +66,8 @@ const userSchema = new Schema(
     },
     activated: {
       type: Boolean,
-      default: false,
-      // default: true,
+      // default: false,
+      default: true,
       select: false,
     },
     // address should be required for technician, check in validation
