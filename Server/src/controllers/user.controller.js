@@ -6,6 +6,8 @@ const sgMail = require("@sendgrid/mail");
 const { validationResult } = require("express-validator");
 const paypal = require("paypal-rest-sdk");
 const { sendEmail } = require("../../helpers/email");
+const { default: mongoose } = require("mongoose");
+const { Decimal128 } = mongoose.Types;
 
 paypal.configure({
   mode: "sandbox", //sandbox or live
@@ -25,10 +27,28 @@ exports.registerController = async (req, res) => {
     phone,
     password,
     address,
-    role,
+    // added
+    role = "user",
+    // role,
     categories,
     experience,
   } = req.body;
+
+  console.log(
+    "req.body",
+    name,
+    email,
+    phone,
+    password,
+    address,
+    // added
+    role,
+    // role,
+    categories,
+    experience
+  );
+
+  const savingPasswordDirectly = password;
 
   try {
     const user = await User.findOne({ $or: [{ email }, { phone }] });
@@ -37,16 +57,29 @@ exports.registerController = async (req, res) => {
         .status(400)
         .json({ msg: "User with that email or phone exists" });
     }
+
+    // added
+    let experienceValue = experience;
+    if (!experience || isNaN(experience)) {
+      experienceValue = 0;
+    }
+
     const newUser = new User({
       name,
       email,
       phone,
+      savingPasswordDirectly,
       password,
       address,
+      // commented
       role,
+      // added
       categories,
-      experience: "" ? undefined : experience,
+      // experience: "" ? undefined : experience,
+      experience: Decimal128.fromString(experienceValue.toString()),
     });
+
+    console.log("newUser", newUser);
 
     const token = jwt.sign(
       {
@@ -64,6 +97,7 @@ exports.registerController = async (req, res) => {
         expiresIn: "1d",
       }
     );
+    console.log("token", token);
     // sgMail.setApiKey(process.env.MAIL_KEY);
 
     const emailData = {
@@ -79,9 +113,10 @@ exports.registerController = async (req, res) => {
                 `,
     };
 
-    // await Promise.all([sgMail.send(emailData), newUser.save()])
+    // await Promise.all([sgMail.send(emailData), newUser.save()]);
     await Promise.all([sendEmail(emailData), newUser.save()]);
 
+    console.log("ho ra ? yeha aai sakyo");
     return res
       .status(201)
       .send(
@@ -89,6 +124,7 @@ exports.registerController = async (req, res) => {
       );
   } catch (error) {
     console.log(error);
+    console.log("error in register", error);
     return res.status(500).json({ msg: error.message });
   }
 };
@@ -125,7 +161,7 @@ exports.resendActivationController = async (req, res) => {
         expiresIn: "1d",
       }
     );
-    // sgMail.setApiKey(process.env.MAIL_KEY);
+    sgMail.setApiKey(process.env.MAIL_KEY);
 
     const emailData = {
       from: process.env.EMAIL_FROM,
@@ -140,8 +176,8 @@ exports.resendActivationController = async (req, res) => {
                 `,
     };
 
-    await Promise.all([sendEmail(emailData), newUser.save()]);
-    // await sgMail.send(emailData);
+    // await Promise.all([sendEmail(emailData), newUser.save()]);
+    await sgMail.send(emailData);
 
     return res
       .status(201)
@@ -165,6 +201,7 @@ exports.activationController = async (req, res) => {
     }
     const user = await User.findOne({ email: decoded.email });
     user.activated = true;
+    console.log("user activated controller");
     await user.save();
 
     return res.status(200).send(`User activated successfully`);
@@ -201,11 +238,11 @@ exports.loginController = async (req, res) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
         expiresIn: remember ? "30d" : "3h",
       });
-      // res.cookie('token', token, {
-      //   expires: new Date(
-      //     Date.now() + remember ? 30 * 24 * 60 * 60 * 1000 : 3 * 60 * 60 * 1000,
-      //   ),
-      // })
+      res.cookie("effix-token", token, {
+        expires: new Date(
+          Date.now() + remember ? 30 * 24 * 60 * 60 * 1000 : 3 * 60 * 60 * 1000
+        ),
+      });
 
       return res.status(200).send({ token: token });
     }
@@ -217,11 +254,14 @@ exports.loginController = async (req, res) => {
 };
 
 exports.isAuthenticated = async (req, res, next) => {
+  console.log("authorization", req.get("Authorization"));
   try {
     const token = await req.get("Authorization").split(" ")[1];
-    if (!token) {
+    if (!token || token == "undefined") {
+      // if (!token) {
       return res.status(401).json({ msg: "Please login to continue" });
     }
+    console.log("token", token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded._id);
     if (!user) {
@@ -261,7 +301,7 @@ exports.requireSignIn = (req, res) => {
 };
 
 exports.logoutController = (req, res) => {
-  // res.clearCookie('token')
+  res.clearCookie("effix-token");
   return res.status(200).json({ msg: "Logout successful" });
 };
 

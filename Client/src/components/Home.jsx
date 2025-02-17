@@ -18,6 +18,7 @@ const Home = (props) => {
     const [response, error] = await activateUser({
       token: props.match.params.id,
     });
+    console.log("response and error in activeAccount", response, error);
     if (response) {
       toast.success("Account activation successful");
       props.history.push("/");

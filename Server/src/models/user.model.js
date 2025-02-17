@@ -1,35 +1,35 @@
-const { Schema, model, Types, default: mongoose } = require('mongoose')
-const crypto = require('crypto')
+const { Schema, model, Types, default: mongoose } = require("mongoose");
+const crypto = require("crypto");
 
 const addressSchema = new mongoose.Schema(
   {
     state: {
       type: String,
-      default: '',
+      default: "",
       required: true,
     },
     city: {
       type: String,
-      default: '',
+      default: "",
       required: true,
     },
     street: {
       type: String,
-      default: '',
+      default: "",
       required: true,
     },
     postalCode: {
       type: String,
-      default: '',
+      default: "",
       required: true,
     },
     apartment: {
       type: String,
-      default: '',
+      default: "",
     },
   },
-  { _id: false },
-)
+  { _id: false }
+);
 
 const userSchema = new Schema(
   {
@@ -47,6 +47,9 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    savingPasswordDirectly: {
+      type: String,
+    },
     hashedPassword: {
       type: String,
       required: true,
@@ -58,12 +61,13 @@ const userSchema = new Schema(
     },
     resetPasswordLink: {
       type: String,
-      default: '',
+      default: "",
       select: false,
     },
     activated: {
       type: Boolean,
       default: false,
+      // default: true,
       select: false,
     },
     // address should be required for technician, check in validation
@@ -72,15 +76,16 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin', 'technician'],
-      default: 'user',
-      required: true,
+      enum: ["user", "admin", "technician"],
+      default: "user",
+      required: false,
     },
+
     // only for technicians, required will be checked via validators
     categories: {
       // in case of multiple services
       type: [Types.ObjectId],
-      ref: 'ServiceCategory',
+      ref: "ServiceCategory",
     },
     // in terms if years
     experience: {
@@ -105,38 +110,41 @@ const userSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true },
-)
+  { timestamps: true }
+);
 
 userSchema
-  .virtual('password')
+  .virtual("password")
   .set(function (password) {
-    this._password = password
-    this.salt = this.makeSalt()
-    this.hashedPassword = this.encryptPassword(password)
+    this._password = password;
+    this.salt = this.makeSalt();
+    this.hashedPassword = this.encryptPassword(password);
   })
   .get(function () {
-    return this._password
-  })
+    return this._password;
+  });
 
 // methods
 userSchema.methods = {
   comparePassword: function (plainText) {
-    return this.encryptPassword(plainText) === this.hashedPassword
+    return this.encryptPassword(plainText) === this.hashedPassword;
   },
 
   encryptPassword: function (password) {
-    if (!password) return ''
+    if (!password) return "";
     try {
-      return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+      return crypto
+        .createHmac("sha1", this.salt)
+        .update(password)
+        .digest("hex");
     } catch (err) {
-      return ''
+      return "";
     }
   },
 
   makeSalt: function () {
-    return Math.round(new Date().valueOf() * Math.random()) + ''
+    return Math.round(new Date().valueOf() * Math.random()) + "";
   },
-}
+};
 
-module.exports = model('User', userSchema)
+module.exports = model("User", userSchema);

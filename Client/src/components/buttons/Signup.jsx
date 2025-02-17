@@ -42,12 +42,16 @@ const Signup = ({ onClose }) => {
     data.address[type] = e.target.value;
     setData({ ...temp });
   };
+
   const serviceList = async () => {
     const [response] = await getService();
+    console.log("response in serviceList", response);
     if (response) {
       setList(response.data);
     }
   };
+  console.log("runn bhai rakheko xa");
+
   const handleSubmit = async () => {
     if (data.password === data.password2) {
       const payload = { ...data };
@@ -68,14 +72,20 @@ const Signup = ({ onClose }) => {
       toast.error("Passwords dont match");
     }
   };
+
   const handleRemove = (index) => {
     const temp = { ...data };
     temp.categories.splice(index, 1);
     setData({ ...temp });
   };
+
   useEffect(() => {
-    serviceList();
-  }, []);
+    console.log("runn bhai na");
+    if (data.role == "technician") {
+      console.log("you run hunxa ta ?");
+      serviceList();
+    }
+  }, [data]);
 
   return (
     <div className="h-[100vh] overflow-y-scroll fixed top-[0%] left-[0%] w-[100vw]  z-[122200] ">
@@ -293,8 +303,8 @@ const Signup = ({ onClose }) => {
                   />
                 </svg>
               </div>
-              <div className="w-full md:w-1/2 py-10 px-5 md:px-10" >
-                <div >
+              <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+                <div>
                   <div>
                     <label
                       for="first_name"
@@ -346,6 +356,7 @@ const Signup = ({ onClose }) => {
                         <option selected>Choose a Role</option>
                         <option value="user">User</option>
                         <option value="technician">Techician</option>
+                        <option value="admin">Admin</option>
                       </select>
                     </div>
                     <div>
