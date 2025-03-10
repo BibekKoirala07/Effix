@@ -1,4 +1,4 @@
-const router = require('express').Router()
+const router = require("express").Router();
 
 const {
   registerController,
@@ -19,46 +19,47 @@ const {
   requestPayment,
   getUsersByRole,
   deleteUserController,
-} = require('../controllers/user.controller')
+} = require("../controllers/user.controller");
 
-const { authorizeOwner, isAdmin } = require('../../helpers/authorization')
+const { authorizeOwner, isAdmin } = require("../../helpers/authorization");
 const {
   validRegister,
   validLogin,
   resetPasswordValidator,
-} = require('../../helpers/validators')
+} = require("../../helpers/validators");
 
-router.post('/register', validRegister, registerController)
-router.post('/resendActivation', resendActivationController)
-router.post('/activate', activationController)
-router.post('/login', validLogin, loginController)
-router.post('/logout', logoutController)
-router.post('/forgotPassword', forgotPasswordController)
-router.post('/resetPassword', resetPasswordValidator, resetPasswordController)
+router.post("/register", validRegister, registerController);
+router.post("/resendActivation", resendActivationController);
+router.post("/activate", activationController);
+router.post("/login", validLogin, loginController);
+router.post("/logout", logoutController);
+router.post("/forgotPassword", forgotPasswordController);
+router.post("/resetPassword", resetPasswordValidator, resetPasswordController);
 router.post(
-  '/updateEmail/:id',
+  "/updateEmail/:id",
   isAuthenticated,
   authorizeOwner,
-  updateEmailController,
-)
-router.post('/resetEmail', resetEmailController)
-router.post('/requireSignIn', isAuthenticated, requireSignIn)
+  updateEmailController
+);
 
-router.post('/admin', isAuthenticated, isAdmin, addAdminController)
+router.post("/resetEmail", resetEmailController);
+router.post("/requireSignIn", isAuthenticated, requireSignIn);
 
-router.get('/:id', getUserController)
-router.get('/', isAuthenticated, isAdmin, getUsersByRole)
+router.post("/admin", isAuthenticated, isAdmin, addAdminController);
 
-router.patch('/:id', isAuthenticated, authorizeOwner, updateUserController)
+router.get("/:id", getUserController);
+router.get("/", isAuthenticated, isAdmin, getUsersByRole);
+
+router.patch("/:id", isAuthenticated, authorizeOwner, updateUserController);
 router.patch(
-  '/password/:id',
+  "/password/:id",
   isAuthenticated,
   authorizeOwner,
-  updatePasswordController,
-)
+  updatePasswordController
+);
 
-router.post('/requestPayment', isAuthenticated, requestPayment)
+router.post("/requestPayment", isAuthenticated, requestPayment);
 
-router.delete('/:id', isAuthenticated, isAdmin, deleteUserController)
+router.delete("/:id", isAuthenticated, isAdmin, deleteUserController);
 
-module.exports = router
+module.exports = router;

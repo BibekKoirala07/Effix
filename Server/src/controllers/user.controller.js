@@ -241,7 +241,7 @@ exports.loginController = async (req, res) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
         expiresIn: remember ? "30d" : "3h",
       });
-      res.cookie("effix-token", token, {
+      res.cookie("token", token, {
         expires: new Date(
           Date.now() + remember ? 30 * 24 * 60 * 60 * 1000 : 3 * 60 * 60 * 1000
         ),
@@ -304,7 +304,7 @@ exports.requireSignIn = (req, res) => {
 };
 
 exports.logoutController = (req, res) => {
-  res.clearCookie("effix-token");
+  res.clearCookie("token");
   return res.status(200).json({ msg: "Logout successful" });
 };
 

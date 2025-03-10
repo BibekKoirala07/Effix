@@ -69,21 +69,38 @@ const App = () => {
   const getOrders = async () => {
     dispatch(toogleSpinner(true));
 
-    const [response] = await getMyOrders();
-    if (response) {
-      console.log(response.data);
-      setOrders(
-        response?.data?.map((value) => {
-          return {
+    // const [response] = await getMyOrders();
+    // if (response) {
+    //   console.log(response.data);
+    //   setOrders(
+    //     response?.data?.map((value) => {
+    //       return {
+    //         ...value,
+    //         name: value?.service?.title,
+    //         date: value?.createdAt?.slice(0, 10),
+    //         imageSrc: value?.service?.image || "",
+    //       };
+    //     })
+    //   );
+    //   dispatch(toogleSpinner(false));
+    // } else {
+    //   dispatch(toogleSpinner(false));
+    // }
+    try {
+      const [response] = await getMyOrders();
+      if (response) {
+        setOrders(
+          response?.data?.map((value) => ({
             ...value,
             name: value?.service?.title,
             date: value?.createdAt?.slice(0, 10),
             imageSrc: value?.service?.image || "",
-          };
-        })
-      );
-      dispatch(toogleSpinner(false));
-    } else {
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    } finally {
       dispatch(toogleSpinner(false));
     }
   };
@@ -105,9 +122,13 @@ const App = () => {
   }, [user]);
 
   useEffect(() => {
+    let isMounted = true;
     dispatch(getUserDetails()).then((response) => {
       dispatch(toogleSpinner(false));
     });
+    return () => {
+      isMounted = false;
+    };
   }, [location]);
 
   return (
