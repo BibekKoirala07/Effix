@@ -88,6 +88,7 @@ const App = () => {
     // }
     try {
       const [response] = await getMyOrders();
+      // console.log("response in getOrders", response);
       if (response) {
         setOrders(
           response?.data?.map((value) => ({
@@ -101,6 +102,7 @@ const App = () => {
     } catch (error) {
       console.error("Error fetching orders:", error);
     } finally {
+      // console.log("dispatch toggleSpinner run bhayo");
       dispatch(toogleSpinner(false));
     }
   };
@@ -117,9 +119,13 @@ const App = () => {
     }
   };
 
+  // useEffect(() => {
+  //   getOrders();
+  // }, [user]);
+
   useEffect(() => {
     getOrders();
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     let isMounted = true;

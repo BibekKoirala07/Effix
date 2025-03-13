@@ -85,12 +85,12 @@ export const deleteAdmin = async (id) => {
 
 export const getService = async () => {
   try {
-    console.log("entering getService");
+    // console.log("entering getService");
     const response = await axiosInstance.get("serviceCategory");
-    console.log("getService", response); // yeha error xa
+    // console.log("getService", response); // yeha error xa
     return [response, null];
   } catch (error) {
-    console.log("direct error in getService");
+    // console.log("direct error in getService");
     return [null, error];
   }
 };
@@ -116,7 +116,7 @@ export const createAdmin = async (body) => {
 export const activateUser = async (body) => {
   try {
     const response = await axiosInstance.post("user/activate", body);
-    console.log("response", response);
+    // console.log("response", response);
     return [response, null];
   } catch (error) {
     return [null, error];
@@ -136,7 +136,7 @@ export const getMyOrders = async () => {
   try {
     console.log("entering getMyOrders");
     const response = await axiosInstance.get("serviceOrder/myOrders");
-    console.log("getMyOrders", response);
+    // console.log("getMyOrders", response);
     return [response, null];
   } catch (error) {
     return [null, error];

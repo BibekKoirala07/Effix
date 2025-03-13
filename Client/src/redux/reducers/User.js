@@ -42,7 +42,7 @@ export const userSlice = createSlice({
     [getUserDetails.fulfilled.toString()]: (state, action) => {
       state.loginpopup = false;
       state.registerPopup = false;
-      console.log(action.payload);
+      // console.log(action.payload);
       const [response] = action.payload;
 
       if (response) {
