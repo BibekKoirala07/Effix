@@ -127,35 +127,35 @@ const App = () => {
     getOrders();
   }, []);
 
-  useEffect(() => {
-    // let isMounted = true;
-    dispatch(getUserDetails()).then((response) => {
-      dispatch(toogleSpinner(false));
-    });
-    // return () => {
-    //   isMounted = false;
-    // };
-  }, [location]);
-
   // useEffect(() => {
-  //   let isMounted = true;
-  //   dispatch(getUserDetails())
-  //     .then(() => {
-  //       if (isMounted) {
-  //         dispatch(toogleSpinner(false));
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching user details:", error);
-  //       if (isMounted) {
-  //         dispatch(toogleSpinner(false));
-  //       }
-  //     });
-
-  //   return () => {
-  //     isMounted = false;
-  //   };
+  //   // let isMounted = true;
+  //   dispatch(getUserDetails()).then((response) => {
+  //     dispatch(toogleSpinner(false));
+  //   });
+  //   // return () => {
+  //   //   isMounted = false;
+  //   // };
   // }, [location]);
+
+  useEffect(() => {
+    let isMounted = true;
+    dispatch(getUserDetails())
+      .then(() => {
+        if (isMounted) {
+          dispatch(toogleSpinner(false));
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user details:", error);
+        if (isMounted) {
+          dispatch(toogleSpinner(false));
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [location]);
 
   return (
     <>

@@ -184,7 +184,7 @@ export default function Header({
                                   className="object-center object-cover"
                                 />
                               </div>
-                              <a
+                              {/* <a
                                 href={item.href}
                                 className="mt-6 block font-medium text-gray-900"
                               >
@@ -193,7 +193,17 @@ export default function Header({
                                   aria-hidden="true"
                                 />
                                 {item.name}
-                              </a>
+                              </a> */}
+                              <Link
+                                to={item.href}
+                                className="mt-6 block font-medium text-gray-900"
+                              >
+                                <span
+                                  className="absolute z-10 inset-0"
+                                  aria-hidden="true"
+                                />
+                                {item.name}
+                              </Link>
                               <p aria-hidden="true" className="mt-1">
                                 Shop now
                               </p>
@@ -237,17 +247,23 @@ export default function Header({
                 <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
-                      <a
+                      {/* <a
                         href={page.href}
                         className="-m-2 p-2 block font-medium text-gray-900"
                       >
                         {page.name}
-                      </a>
+                      </a> */}
+                      <Link
+                        to={page.href}
+                        className="-m-2 p-2 block font-medium text-gray-900"
+                      >
+                        {page.name}
+                      </Link>
                     </div>
                   ))}
                   {User?.user.role != "user" && User?.isLoggedIn ? (
                     <div className="flow-root">
-                      <a
+                      {/* <a
                         href={
                           User?.user.role === "admin"
                             ? "/admin/dashboard"
@@ -256,7 +272,17 @@ export default function Header({
                         className="-m-2 p-2 block font-medium text-gray-900"
                       >
                         Dashboard
-                      </a>
+                      </a> */}
+                      <Link
+                        to={
+                          User?.user.role === "admin"
+                            ? "/admin/dashboard"
+                            : "/technician/dashboard"
+                        }
+                        className="-m-2 p-2 block font-medium text-gray-900"
+                      >
+                        Dashboard
+                      </Link>
                     </div>
                   ) : (
                     ""

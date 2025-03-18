@@ -41,6 +41,7 @@ export default function SinglePage(props) {
 
   const getSingleProduct = async () => {
     const [response] = await getSingleService(props?.match?.params?.id);
+    console.log("response", response);
     if (response) {
       const iterate = response.data;
       console.log(iterate);
@@ -61,10 +62,12 @@ export default function SinglePage(props) {
             <img
               src={
                 data.image
-                  ? `${URL_BACKEND}${data.image}`
+                  ? `${URL_BACKEND}/${data.image}`
                   : "/photos/services/placeholder.jpg"
               }
-              onError={(e) => e.target.src = "/photos/services/placeholder.jpg"}
+              onError={(e) =>
+                (e.target.src = "/photos/services/placeholder.jpg")
+              }
               alt={"Service"}
               className="w-auto h-[550px] object-center object-cover"
             />
