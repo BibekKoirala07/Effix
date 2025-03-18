@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { getUserDetails } from "../redux/actions/user.actions";
 import { toogleEmail, tooglePassword } from "../redux/reducers/User";
 import { useEffect } from "react";
+
 const navigationDemo = {
   categories: [
     {
@@ -60,6 +61,7 @@ export default function Header({
       dispatch(getUserDetails());
     }
   };
+
   const getServices = async () => {
     const [response] = await getService();
     if (response) {
@@ -90,6 +92,7 @@ export default function Header({
       setList(payload);
     }
   };
+
   const handleLoginClose = (value) => {
     dispatch(toogleLogin(value));
   };
@@ -309,28 +312,43 @@ export default function Header({
                 className="ml-4 bg-accent px-3 py-2 rounded flex lg:ml-0 "
                 onClick={() => history.push("/")}
               >
-                <a href="#">
+                {/* <a href="/">
                   <span className="sr-only">Workflow</span>
                   <img className="h-6 w-auto" src="/photos/logo.png" alt="" />
-                </a>
+                </a> */}
+                <Link href={"/"}>
+                  <span className="sr-only">Workflow</span>
+                  <img className="h-6 w-auto" src="/photos/logo.png" alt="" />
+                </Link>
               </div>
 
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="h-full flex space-x-8">
                   {navigation.pages.map((page) => (
-                    <a
+                    <Link
                       key={page.name}
-                      href={page.href}
+                      to={page.href}
+                      // href={page.href}
                       className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                     >
                       {page.name}
-                    </a>
+                    </Link>
                   ))}
 
                   {User?.user.role != "user" && User?.isLoggedIn && (
-                    <a
-                      href={
+                    // <a
+                    //   href={
+                    //     User?.user.role === "admin"
+                    //       ? "/admin/dashboard"
+                    //       : "/technician/dashboard"
+                    //   }
+                    //   className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                    // >
+                    //   Dashboard
+                    // </a>
+                    <Link
+                      to={
                         User?.user.role === "admin"
                           ? "/admin/dashboard"
                           : "/technician/dashboard"
@@ -338,7 +356,7 @@ export default function Header({
                       className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                     >
                       Dashboard
-                    </a>
+                    </Link>
                   )}
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">

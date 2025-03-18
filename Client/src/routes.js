@@ -127,7 +127,8 @@ const routes = [
     ],
   },
   {
-    path: "/technician/*",
+    // path: "/technician/*",
+    path: "/technician/",
     layout: TechnicianLayout,
     guard: TechnicianGuard,
     routes: [
@@ -157,7 +158,8 @@ const routes = [
     ],
   },
   {
-    path: "/admin/*",
+    // path: "/admin/*",
+    path: "/admin/",
     layout: AdminLayout,
     guard: AuthGuard,
     routes: [

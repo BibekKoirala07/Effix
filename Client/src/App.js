@@ -10,11 +10,11 @@ import {
   toogleEmail,
   toogleSpinner,
 } from "./redux/reducers/User";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import "react-toastify/dist/ReactToastify.css";
 
-import Layout from "./dashboard/Landing/Landing";
-import DashHome from "./dashboard/Home/DashHome";
+// import Layout from "./dashboard/Landing/Landing";
+// import DashHome from "./dashboard/Home/DashHome";
 import routes, { renderRoutes } from "./routes";
 import Signup from "./components/buttons/Signup";
 import { useEffect, useState } from "react";
@@ -28,13 +28,13 @@ import Email from "./components/buttons/Email";
 import Spinner from "./components/Spinner/Spinner";
 import { deleteOrder } from "./services/service.services";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
-import Home from "./components/Home";
-import Services from "./components/Services";
-import Contact from "./components/Contact";
-import ServicesDetail from "./components/ServicesDetail";
-import Cart from "./components/Cart";
-import About from "./components/About";
-import Technician from "./components/Technician";
+// import Home from "./components/Home";
+// import Services from "./components/Services";
+// import Contact from "./components/Contact";
+// import ServicesDetail from "./components/ServicesDetail";
+// import Cart from "./components/Cart";
+// import About from "./components/About";
+// import Technician from "./components/Technician";
 
 const App = () => {
   const loginPopup = useSelector((state) => state.user.loginpopup);
