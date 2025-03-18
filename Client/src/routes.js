@@ -75,191 +75,42 @@ export const renderRoutes = (routes = []) => (
 //   </Suspense>
 // );
 
-const useLazyLoading = true;
-
-// Function to conditionally import components based on `useLazyLoading`
-const loadComponent = (path) => {
-  if (useLazyLoading) {
-    return lazy(() => import(path));
-  }
-  // If lazy loading is off, just import normally
-  return require(path).default;
-};
-
-// const routes = [
-//   {
-//     exact: true,
-//     // layout: UserLayout,
-//     path: "/",
-//     component: lazy(() => import("./components/Home")),
-//   },
-//   {
-//     path: "/users/activation/:id",
-//     component: lazy(() => import("./components/Home")),
-//   },
-//   {
-//     path: "/users/password/reset/:id",
-//     component: lazy(() => import("./components/Home")),
-//   },
-//   {
-//     path: "/users/email/reset/:id",
-//     component: lazy(() => import("./components/Home")),
-//   },
-//   {
-//     path: "/payment/successful",
-//     component: lazy(() => import("./components/buttons/Success")),
-//   },
-//   {
-//     path: "/payment/cancelled",
-//     component: lazy(() => import("./components/buttons/Error")),
-//   },
-//   {
-//     path: "/service/:id",
-//     component: lazy(() => import("./components/SinglePage/SinglePage")),
-//   },
-//   {
-//     exact: true,
-//     path: "/profile",
-//     title: "Dashboard",
-//     component: lazy(() => import("./components/ProfileEditor/ProfileEditor")),
-//   },
-//   {
-//     path: "/user/*",
-//     guard: UserGuard,
-//     routes: [
-//       {
-//         path: "/service/:id",
-//         component: lazy(() => import("./components/SinglePage/SinglePage")),
-//       },
-//     ],
-//   },
-//   {
-//     path: "/technician/*",
-//     layout: TechnicianLayout,
-//     guard: TechnicianGuard,
-//     routes: [
-//       {
-//         exact: true,
-//         path: "/technician/dashboard",
-//         title: "Dashboard",
-//         component: lazy(() => import("./dashboard/Home/ActiveOrders")),
-//       },
-//       {
-//         exact: true,
-//         path: "/technician/orderStatus",
-//         title: "Order Status",
-//         component: lazy(() => import("./dashboard/OrderStatus/OrderStatus")),
-//       },
-//       {
-//         exact: true,
-//         path: "/technician/payment",
-//         title: "Order Status",
-//         component: lazy(() => import("./dashboard/Payment/Payment")),
-//       },
-//       {
-//         path: "*",
-//         exact: true,
-//         component: () => <Redirect to={BASE_URL} />,
-//       },
-//     ],
-//   },
-//   {
-//     path: "/admin/*",
-//     layout: AdminLayout,
-//     guard: AuthGuard,
-//     routes: [
-//       {
-//         exact: true,
-//         path: "/admin/dashboard",
-//         title: "Dashboard",
-//         component: lazy(() => import("./dashboard/Home/DashHome")),
-//       },
-//       {
-//         exact: true,
-//         path: "/admin/dashboard/services",
-//         title: "Services",
-//         component: lazy(() => import("./dashboard/Services/DashHome")),
-//       },
-//       {
-//         exact: true,
-//         path: "/admin/dashboard/technician",
-//         title: "Services",
-//         component: lazy(() => import("./dashboard/Technician/Technician")),
-//       },
-//       {
-//         exact: true,
-//         path: "/admin/dashboard/admins",
-//         title: "Services",
-//         component: lazy(() => import("./dashboard/Admin/Admin")),
-//       },
-//       {
-//         exact: true,
-//         path: "/admin/dashboard/services/create",
-//         title: "Create Services",
-//         component: lazy(() => import("./dashboard/Services/Create")),
-//       },
-//       {
-//         exact: true,
-//         path: "/admin/dashboard/services/edit/:id",
-//         title: "Edit Services",
-//         component: lazy(() => import("./dashboard/Services/Create")),
-//       },
-//       {
-//         exact: true,
-//         path: "/admin/dashboard/manageAdmin",
-//         title: "Create Admins",
-//         component: lazy(() => import("./dashboard/Manage/Create")),
-//       },
-//       {
-//         path: "*",
-//         exact: true,
-//         component: () => <Redirect to={BASE_URL} />,
-//       },
-//     ],
-//   },
-//   {
-//     path: "*",
-//     exact: true,
-//     component: () => <Redirect to={BASE_URL} />,
-//   },
-// ];
-
 const routes = [
   {
     exact: true,
     // layout: UserLayout,
     path: "/",
-    component: loadComponent("./components/Home"),
+    component: lazy(() => import("./components/Home")),
   },
   {
     path: "/users/activation/:id",
-    component: loadComponent("./components/Home"),
+    component: lazy(() => import("./components/Home")),
   },
   {
     path: "/users/password/reset/:id",
-    component: loadComponent("./components/Home"),
+    component: lazy(() => import("./components/Home")),
   },
   {
     path: "/users/email/reset/:id",
-    component: loadComponent("./components/Home"),
+    component: lazy(() => import("./components/Home")),
   },
   {
     path: "/payment/successful",
-    component: loadComponent("./components/buttons/Success"),
+    component: lazy(() => import("./components/buttons/Success")),
   },
   {
     path: "/payment/cancelled",
-    component: loadComponent("./components/buttons/Error"),
+    component: lazy(() => import("./components/buttons/Error")),
   },
   {
     path: "/service/:id",
-    component: loadComponent("./components/SinglePage/SinglePage"),
+    component: lazy(() => import("./components/SinglePage/SinglePage")),
   },
   {
     exact: true,
     path: "/profile",
     title: "Dashboard",
-    component: loadComponent("./components/ProfileEditor/ProfileEditor"),
+    component: lazy(() => import("./components/ProfileEditor/ProfileEditor")),
   },
   {
     path: "/user/*",
@@ -267,7 +118,7 @@ const routes = [
     routes: [
       {
         path: "/service/:id",
-        component: loadComponent("./components/SinglePage/SinglePage"),
+        component: lazy(() => import("./components/SinglePage/SinglePage")),
       },
     ],
   },
@@ -280,19 +131,19 @@ const routes = [
         exact: true,
         path: "/technician/dashboard",
         title: "Dashboard",
-        component: loadComponent("./dashboard/Home/ActiveOrders"),
+        component: lazy(() => import("./dashboard/Home/ActiveOrders")),
       },
       {
         exact: true,
         path: "/technician/orderStatus",
         title: "Order Status",
-        component: loadComponent("./dashboard/OrderStatus/OrderStatus"),
+        component: lazy(() => import("./dashboard/OrderStatus/OrderStatus")),
       },
       {
         exact: true,
         path: "/technician/payment",
         title: "Order Status",
-        component: loadComponent("./dashboard/Payment/Payment"),
+        component: lazy(() => import("./dashboard/Payment/Payment")),
       },
       {
         path: "*",
@@ -310,43 +161,43 @@ const routes = [
         exact: true,
         path: "/admin/dashboard",
         title: "Dashboard",
-        component: loadComponent("./dashboard/Home/DashHome"),
+        component: lazy(() => import("./dashboard/Home/DashHome")),
       },
       {
         exact: true,
         path: "/admin/dashboard/services",
         title: "Services",
-        component: loadComponent("./dashboard/Services/DashHome"),
+        component: lazy(() => import("./dashboard/Services/DashHome")),
       },
       {
         exact: true,
         path: "/admin/dashboard/technician",
         title: "Services",
-        component: loadComponent("./dashboard/Technician/Technician"),
+        component: lazy(() => import("./dashboard/Technician/Technician")),
       },
       {
         exact: true,
         path: "/admin/dashboard/admins",
         title: "Services",
-        component: loadComponent("./dashboard/Admin/Admin"),
+        component: lazy(() => import("./dashboard/Admin/Admin")),
       },
       {
         exact: true,
         path: "/admin/dashboard/services/create",
         title: "Create Services",
-        component: loadComponent("./dashboard/Services/Create"),
+        component: lazy(() => import("./dashboard/Services/Create")),
       },
       {
         exact: true,
         path: "/admin/dashboard/services/edit/:id",
         title: "Edit Services",
-        component: loadComponent("./dashboard/Services/Create"),
+        component: lazy(() => import("./dashboard/Services/Create")),
       },
       {
         exact: true,
         path: "/admin/dashboard/manageAdmin",
         title: "Create Admins",
-        component: loadComponent("./dashboard/Manage/Create"),
+        component: lazy(() => import("./dashboard/Manage/Create")),
       },
       {
         path: "*",
