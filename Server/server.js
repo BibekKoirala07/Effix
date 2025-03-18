@@ -21,7 +21,11 @@ const userRouter = require("./src/routes/user.route");
 const serviceCategoryRouter = require("./src/routes/serviceCategory.route");
 const serviceOrderRouter = require("./src/routes/serviceOrder.route");
 
-const allowedDomains = ["http://localhost:3000", process.env.PROD_CLIENT_URL];
+const allowedDomains = [
+  "http://localhost:3000",
+  "https://effix-1.onrender.com",
+  process.env.PROD_CLIENT_URL,
+];
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;

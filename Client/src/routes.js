@@ -165,8 +165,7 @@ const routes = [
         exact: true,
         path: "/admin/dashboard",
         title: "Dashboard",
-        // component: lazy(() => import("./dashboard/Home/DashHome")),
-        component: SimpleAdmin,
+        component: lazy(() => import("./dashboard/Home/DashHome")),
       },
       {
         exact: true,
