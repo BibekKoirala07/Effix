@@ -128,13 +128,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    let isMounted = true;
+    // let isMounted = true;
     dispatch(getUserDetails()).then((response) => {
       dispatch(toogleSpinner(false));
     });
-    return () => {
-      isMounted = false;
-    };
+    // return () => {
+    //   isMounted = false;
+    // };
   }, [location]);
 
   // useEffect(() => {
