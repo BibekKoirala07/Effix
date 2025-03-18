@@ -75,6 +75,10 @@ export const renderRoutes = (routes = []) => (
 //   </Suspense>
 // );
 
+const SimpleAdmin = () => {
+  return <div>Simple Admin Page</div>;
+};
+
 const routes = [
   {
     exact: true,
@@ -161,7 +165,8 @@ const routes = [
         exact: true,
         path: "/admin/dashboard",
         title: "Dashboard",
-        component: lazy(() => import("./dashboard/Home/DashHome")),
+        // component: lazy(() => import("./dashboard/Home/DashHome")),
+        component: SimpleAdmin,
       },
       {
         exact: true,
