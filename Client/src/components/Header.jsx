@@ -406,7 +406,7 @@ export default function Header({
                                               className="object-center object-cover"
                                             />
                                           </div>
-                                          <a
+                                          {/* <a
                                             href={item.href}
                                             className="mt-6 block font-medium text-gray-900"
                                           >
@@ -415,7 +415,17 @@ export default function Header({
                                               aria-hidden="true"
                                             />
                                             {item.name}
-                                          </a>
+                                          </a> */}
+                                          <Link
+                                            to={item.href}
+                                            className="mt-6 block font-medium text-gray-900"
+                                          >
+                                            <span
+                                              className="absolute z-10 inset-0"
+                                              aria-hidden="true"
+                                            />
+                                            {item.name}
+                                          </Link>
                                           <p
                                             aria-hidden="true"
                                             className="mt-1"
@@ -484,7 +494,7 @@ export default function Header({
                     className="ml-4 flow-root lg:ml-6"
                     onClick={() => toogleOrder(true)}
                   >
-                    <a href="#" className="group -m-2 p-2 flex items-center">
+                    {/* <a href="#" className="group -m-2 p-2 flex items-center">
                       <ShoppingBagIcon
                         className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
@@ -493,7 +503,17 @@ export default function Header({
                         {count}
                       </span>
                       <span className="sr-only">items in cart, view bag</span>
-                    </a>
+                    </a> */}
+                    <Link to={"/"} className="group -m-2 p-2 flex items-center">
+                      <ShoppingBagIcon
+                        className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                        {count}
+                      </span>
+                      <span className="sr-only">items in cart, view bag</span>
+                    </Link>
                   </div>
                 ) : (
                   <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
