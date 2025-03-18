@@ -55,7 +55,10 @@ const CreateService = (props) => {
       formdata.set("description", data.description);
       formdata.set("image", file);
 
+      console.log("file", file);
+
       const [response] = await createService(formdata);
+      console.log("response in service create", response);
       if (response) {
         history.push("/admin/dashboard/services");
       }
@@ -135,8 +138,8 @@ const CreateService = (props) => {
                 ></path>
               </svg>
               <p className="mb-2 text-sm text-gray-500 ">
-                <span className="font-semibold">Click to upload</span> or drag and
-                drop
+                <span className="font-semibold">Click to upload</span> or drag
+                and drop
               </p>
               <p className="text-xs text-gray-500 ">
                 SVG, PNG, JPG or GIF (MAX. 800x400px)

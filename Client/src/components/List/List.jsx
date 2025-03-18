@@ -28,6 +28,7 @@ export default function Items() {
   const dispatch = useDispatch();
   const serviceList = async () => {
     const [response] = await getService();
+    console.log("response in serviceList", response);
     if (response) {
       setList(response.data);
     }
@@ -47,48 +48,51 @@ export default function Items() {
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {list.map((product) => (
-            <div key={product._id} className="group relative">
-              <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                <img
-                  src={
-                    product.image
-                      ? `${URL_BACKEND}${product.image}`
-                      : "/photos/services/placeholder.jpg"
+          {list.map((product) => {
+            console.log("product", product);
+            const src = product.image
+              ? `${URL_BACKEND}/${product.image}`
+              : "/photos/services/placeholder.jpg";
+            console.log("src", src);
+            return (
+              <div key={product._id} className="group relative">
+                <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                  <img
+                    src={src}
+                    onError={(e) =>
+                      (e.target.src = "/photos/services/placeholder.jpg")
+                    }
+                    alt={product.imageAlt}
+                    className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                  />
+                </div>
+                <div
+                  className="mt-4 flex cursor-pointer flex-col justify-between"
+                  onClick={() =>
+                    !user?.isLoggedIn
+                      ? handleLoginClose(true)
+                      : router.push(`/service/${product._id}`)
                   }
-                  onError={(e) =>
-                    (e.target.src = "/photos/services/placeholder.jpg")
-                  }
-                  alt={product.imageAlt}
-                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-                />
-              </div>
-              <div
-                className="mt-4 flex cursor-pointer flex-col justify-between"
-                onClick={() =>
-                  !user?.isLoggedIn
-                    ? handleLoginClose(true)
-                    : router.push(`/service/${product._id}`)
-                }
-              >
-                {/* {console.log(user)} */}
-                <div>
-                  <h3 className="text-lg text-gray-900">
-                    <a href={product.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.title}
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500 whitespace-nowrap text-ellipsis overflow-hidden">
-                    {product.description}
+                >
+                  {/* {console.log(user)} */}
+                  <div>
+                    <h3 className="text-lg text-gray-900">
+                      <a href={product.href}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {product.title}
+                      </a>
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500 whitespace-nowrap text-ellipsis overflow-hidden">
+                      {product.description}
+                    </p>
+                  </div>
+                  <p className="text-sm bg-accent cursor-pointer w-max px-4 mt-2 text-white rounded py-2 font-medium text-gray-900">
+                    Order Service
                   </p>
                 </div>
-                <p className="text-sm bg-accent cursor-pointer w-max px-4 mt-2 text-white rounded py-2 font-medium text-gray-900">
-                  Order Service
-                </p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -88,7 +88,7 @@ const App = () => {
     // }
     try {
       const [response] = await getMyOrders();
-      // console.log("response in getOrders", response);
+      console.log("response in getOrders", response);
       if (response) {
         setOrders(
           response?.data?.map((value) => ({
