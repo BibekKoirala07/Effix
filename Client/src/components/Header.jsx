@@ -276,10 +276,8 @@ export default function Header({
                       <Link
                         to={
                           User?.user.role === "admin"
-                            ? // ? "/admin/dashboard"
-                              "/"
-                            : // : "/technician/dashboard"
-                              "/"
+                            ? "/admin/dashboard"
+                            : "/technician/dashboard"
                         }
                         className="-m-2 p-2 block font-medium text-gray-900"
                       >
@@ -377,10 +375,9 @@ export default function Header({
                     // </a>
                     <Link
                       to={
-                        // User?.user.role === "admin"
-                        //   ? "/admin/dashboard"
-                        //   : "/technician/dashboard"
-                        User?.user.role === "admin" ? "/" : "/"
+                        User?.user.role === "admin"
+                          ? "/admin/dashboard"
+                          : "/technician/dashboard"
                       }
                       className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                     >

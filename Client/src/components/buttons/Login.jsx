@@ -32,11 +32,13 @@ const Login = (props) => {
         const [res] = response.payload;
         if (res.data.role == "technician") {
           console.log("here1", res.data.role);
-          router.push("/technician/dashboard");
+          // router.push("/technician/dashboard");
+          router.push("/");
         }
         if (res.data.role.trim() == "admin") {
           console.log("here", res.data.role);
-          router.push("/admin/dashboard");
+          // router.push("/admin/dashboard");
+          router.push("/");
         }
         router.go(0);
       });
