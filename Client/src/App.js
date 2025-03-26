@@ -197,7 +197,7 @@ const App = () => {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/technician" component={Technician} /> */}
       </Switch>
-      {spinner && <Spinner />}
+      {/* {spinner && <Spinner />} */}
       {/* {true && <Spinner />} */}
       <Footer />
     </>
